@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signify</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Add Material Icons for better UI -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Signify</h1>
+            <p class="subtitle">Connect and chat in real-time with instant text or speech translation for seamless communication</p>
+        </header>
+
+        <main>
+            <section class="step-container">
+                <div class="step-header">
+                    <span class="step-number">1</span>
+                    <h2>Start your Webcam</h2>
+                </div>
+                
+                <div class="videos">
+                    <div class="video-wrapper">
+                        <div class="video-header">
+                            <h3>Local Stream</h3>
+                            <span class="status-indicator local"></span>
+                        </div>
+                        <video id="webcamVideo" autoplay playsinline></video>
+                    </div>
+                    
+                    <div class="video-wrapper">
+                        <div class="video-header">
+                            <h3>Remote Stream</h3>
+                            <span class="status-indicator remote"></span>
+                        </div>
+                        <video id="remoteVideo" autoplay playsinline></video>
+                    </div>
+                </div>
+                
+                <button id="webcamButton" class="btn">
+                    <span class="material-icons">videocam</span>
+                    Start webcam
+                </button>
+            </section>
+
+            <section class="step-container">
+                <div class="step-header">
+                    <span class="step-number">2</span>
+                    <h2>Create a new Call</h2>
+                </div>
+                <button id="callButton" class="btn" disabled>
+                    <span class="material-icons">call</span>
+                    Create Call (offer)
+                </button>
+            </section>
+
+            <section class="step-container">
+                <div class="step-header">
+                    <span class="step-number">3</span>
+                    <h2>Join a Call</h2>
+                </div>
+                <p class="instruction">Answer the call from a different browser window or device</p>
+                <div class="input-group">
+                    <input id="callInput" placeholder="Paste call ID here..." />
+                    <button id="answerButton" class="btn" disabled>
+                        <span class="material-icons">call_received</span>
+                        Answer
+                    </button>
+                </div>
+            </section>
+
+            <section class="step-container">
+                <div class="step-header">
+                    <span class="step-number">4</span>
+                    <h2>Hangup</h2>
+                </div>
+                <button id="hangupButton" class="btn danger" disabled>
+                    <span class="material-icons">call_end</span>
+                    Hangup
+                </button>
+            </section>
+        </main>
+    </div>
+    
+    <script type="module" src="/main.js"></script>
+</body>
+</html>
