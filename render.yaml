@@ -3,7 +3,8 @@ services:
     name: webrtc-demo
     env: node
     plan: free
-    buildCommand: npm install && npm run build
+    build:
+      command: npm install --include=dev && npm run build
     startCommand: npm run serve
     envVars:
       - key: FIREBASE_API_KEY
