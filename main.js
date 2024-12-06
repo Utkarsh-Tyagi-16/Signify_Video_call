@@ -43,6 +43,12 @@ const answerButton = document.getElementById('answerButton');
 const remoteVideo = document.getElementById('remoteVideo');
 const hangupButton = document.getElementById('hangupButton');
 
+// Helper Function: Log errors
+const logError = (message, error) => {
+  console.error(`${message}:`, error);
+  alert(message);
+};
+
 // 1. Setup media sources
 webcamButton.onclick = async () => {
   try {
@@ -50,15 +56,11 @@ webcamButton.onclick = async () => {
     remoteStream = new MediaStream();
 
     // Push tracks from local stream to peer connection
-    localStream.getTracks().forEach((track) => {
-      pc.addTrack(track, localStream);
-    });
+    localStream.getTracks().forEach((track) => pc.addTrack(track, localStream));
 
     // Pull tracks from remote stream, add to video stream
     pc.ontrack = (event) => {
-      event.streams[0].getTracks().forEach((track) => {
-        remoteStream.addTrack(track);
-      });
+      event.streams[0].getTracks().forEach((track) => remoteStream.addTrack(track));
     };
 
     webcamVideo.srcObject = localStream;
@@ -68,8 +70,7 @@ webcamButton.onclick = async () => {
     answerButton.disabled = false;
     webcamButton.disabled = true;
   } catch (error) {
-    console.error("Error accessing media devices:", error);
-    alert("Could not access webcam or microphone. Please check your permissions.");
+    logError("Error accessing media devices", error);
   }
 };
 
@@ -87,7 +88,7 @@ callButton.onclick = async () => {
         try {
           await addDoc(offerCandidates, event.candidate.toJSON());
         } catch (e) {
-          console.error("Failed to add offer candidate:", e);
+          logError("Failed to add offer candidate", e);
         }
       }
     };
@@ -121,8 +122,7 @@ callButton.onclick = async () => {
 
     hangupButton.disabled = false;
   } catch (error) {
-    console.error("Error creating offer:", error);
-    alert("Failed to create a call. Please check your Firestore rules and configuration.");
+    logError("Error creating offer", error);
   }
 };
 
@@ -144,7 +144,7 @@ answerButton.onclick = async () => {
         try {
           await addDoc(answerCandidates, event.candidate.toJSON());
         } catch (e) {
-          console.error("Failed to add answer candidate:", e);
+          logError("Failed to add answer candidate", e);
         }
       }
     };
@@ -177,8 +177,7 @@ answerButton.onclick = async () => {
       });
     });
   } catch (error) {
-    console.error("Error answering call:", error);
-    alert("Failed to answer the call. Please check the call ID and try again.");
+    logError("Error answering call", error);
   }
 };
 
@@ -186,4 +185,4 @@ answerButton.onclick = async () => {
 const callsRef = collection(firestore, 'calls');
 getDocs(callsRef)
   .then(() => console.log('Permissions are set correctly.'))
-  .catch((e) => console.error('Permissions issue:', e));
+  .catch((e) => logError("Permissions issue", e));

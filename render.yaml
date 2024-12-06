@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: webrtc-demo
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run serve
+    envVars:
+      - key: FIREBASE_API_KEY
+        value: "AIzaSyBD5GoLZyhICzvrP2Kn9bxFEI-oK8ez3fc"
+      - key: FIREBASE_AUTH_DOMAIN
+        value: "video-call-c7030.firebaseapp.com"
+      - key: FIREBASE_PROJECT_ID
+        value: "video-call-c7030"
+      - key: FIREBASE_STORAGE_BUCKET
+        value: "video-call-c7030.appspot.com"
+      - key: FIREBASE_MESSAGING_SENDER_ID
+        value: "894979492610"
+      - key: FIREBASE_APP_ID
+        value: "1:894979492610:web:5227cf833f11471106901b"
+      - key: FIREBASE_MEASUREMENT_ID
+        value: "G-VHDB03MN01"
