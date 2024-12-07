@@ -28,9 +28,9 @@ Run the following command to install all the dependencies together:
 
 bash
 Copy code
-
+```
 npm install firebase vite style-loader css-loader dotenv
-
+```
 Development Command
 
 After installation, you can start the development server with:
